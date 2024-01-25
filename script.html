@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Section</title>
+    <!-- Include Firebase scripts -->
+    <video autoplay loop muted src="https://www.shutterstock.com/shutterstock/videos/1093083365/preview/stock-footage--d-animation-abstract-black-background-with-pink-blue-neon-lines-go-up-and-disappear.webm"></video>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+    <style>
+        /* Add some basic styling */
+        body
+.container {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.comment-form input, .comment-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.comment-form button {
+  padding: 10px;
+  background-color: #ff0077cb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+video {
+    position: fixed;
+    top: 0;
+
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Place the video behind other content */
+  }
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.comment-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-date {
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.comment-text {
+  line-height: 1.5;
+}
+/* Add a subtle gradient background to the body */
+body {
+background: linear-gradient(to left, #ab68ca, #de67a3);
+}
+
+/* Style the heading with a subtle shadow */
+h1 {
+color: #f70d7e;
+text-align: center;
+font-size:2.5rem;
+text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a gradient background to posts */
+.post {
+
+  margin-left: 0%;
+background: linear-gradient(135deg, #fff, #f0f0f0);
+}
+
+/* Add a border around posts */
+.post {
+border: 1px solid #ddd;
+
+
+}
+
+/* Style the post title with a slight text shadow */
+.post h2 {
+color: #555;
+
+text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Darken the text color on button hover */
+
+
+/* Increase the box-shadow on hover for a more pronounced lift effect */
+
+
+/* Add a transition for the border-radius on posts */
+.post {
+transition: border-radius 0.3s ease-in-out;
+}
+
+/* Add a smooth transition for the transform effect on post hover */
+.post {
+transition: transform 0.3s ease-in-out;
+}
+
+/* Style the deleted post with a strike-through effect */
+.deleted-post {
+text-decoration: line-through;
+}
+
+/* Add a subtle border-radius to the reply form */
+.reply-form input, .reply-form textarea {
+  padding: 10px;
+ width: 97.6%;
+  align-items: center;
+  align-self: center;
+  border: 1px solid #191818;
+
+}
+
+.reply-button {
+padding: 10px;
+margin-top: 1%;
+margin-left: 30%;
+width: 35%;
+  background-color:  #ff0077cb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Doubt Section</h1>
+    <form class="comment-form" id="comment-form">
+      <input type="text" id="name" placeholder="Enter Your name" required>
+
+      <textarea id="comment" placeholder="Your comment" rows="5" required></textarea>
+      <button type="button" onclick="postMessage()">Post</button>
+    </form>
+    <div id="comments"></div>
+    <div id="post-list"></div>
+    <input type="text" id="n" placeholder="Your name" required>
+  </div>
+
+  <script>
+    // Initialize Firebase
+    var firebaseConfig = {
+      apiKey: "AIzaSyD5BCoFI0tanoosB5Ve83Bctnqr5QzLef0",
+      authDomain: "hello-76ceb.firebaseapp.com",
+      projectId: "hello-76ceb",
+      storageBucket: "hello-76ceb.appspot.com",
+      messagingSenderId: "355694591685",
+      appId: "1:355694591685:web:0cb68e4afbee721539faac"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    var database = firebase.database();
+
+    // Get a reference to the comments node
+    var commentsRef = database.ref('comments');
+
+    // Get the elements from the HTML
+    var commentForm = document.getElementById('comment-form');
+    var nameInput = document.getElementById('name');
+    var nInput = document.getElementById('n');
+    var commentInput = document.getElementById('comment');
+    var commentsDiv = document.getElementById('comments');
+
+    // Listen for the submit event on the form
+    commentForm.addEventListener('submit', function(event) {
+      // Prevent the default form submission
+      event.preventDefault();
+
+      // Get the values from the inputs
+      var name = nameInput.value;
+     
+      var comment = commentInput.value;
+
+      // Validate the inputs
+      if (name && email && comment) {
+        // Create a new comment object
+        var newComment = {
+          name: name,
+       
+          comment: comment,
+          date: new Date().toISOString()
+        };
+
+        // Push the new comment to the database
+        commentsRef.push(newComment);
+
+        // Clear the inputs
+        nameInput.value = '';
+      
+        commentInput.value = '';
+      } else {
+        // Show an alert if some inputs are missing
+        alert('Please fill in all the fields');
+      }
+    });
+
+    // Listen for the child_added event on the comments node
+    commentsRef.on('child_added', function(snapshot) {
+      // Get the comment data from the snapshot
+      var commentData = snapshot.val();
+
+      // Create a new comment element
+      var commentElement = document.createElement('div');
+      commentElement.className = 'comment';
+
+      // Create the avatar element
+      var avatarElement = document.createElement('img');
+      avatarElement.className = 'comment-avatar';
+      avatarElement.src = 'https://www.gravatar.com/avatar/' + md5(commentData.email); // Use md5 to generate a unique avatar from the email
+
+      // Create the content element
+      var contentElement = document.createElement('div');
+      contentElement.className = 'comment-content';
+
+      // Create the author element
+      var authorElement = document.createElement('div');
+      authorElement.className = 'comment-author';
+      authorElement.textContent = commentData.name;
+
+      // Create the date element
+      var dateElement = document.createElement('div');
+      dateElement.className = 'comment-date';
+      dateElement.textContent = new Date(commentData.date).toLocaleString();
+
+      // Create the text element
+      var textElement = document.createElement('div');
+      textElement.className = 'comment-text';
+      textElement.textContent = commentData.comment;
+
+      // Append the elements to the content element
+      contentElement.appendChild(authorElement);
+      contentElement.appendChild(dateElement);
+      contentElement.appendChild(textElement);
+
+      // Append the elements to the comment element
+      commentElement.appendChild(avatarElement);
+      commentElement.appendChild(contentElement);
+
+      // Append the comment element to the comments div
+      commentsDiv.appendChild(commentElement);
+    });
+
+    // A simple md5 hash function for the avatar
+    function md5(str) {
+      return crypto.subtle.digest('MD5', new TextEncoder().encode(str)).then(function(hash) {
+        return hex(hash);
+      });
+    }
+
+    // A simple hex function for the avatar
+    function hex(buffer) {
+      var hexCodes = [];
+      var view = new DataView(buffer);
+      for (var i = 0; i < view.byteLength; i += 4) {
+        var value = view.getUint32(i)
+        var stringValue = value.toString(16)
+        var padding = '00000000'
+        var paddedValue = (padding + stringValue).slice(-padding.length)
+        hexCodes.push(paddedValue);
+      }
+      return hexCodes.join("");
+    }
+
+    function postMessage() {
+      const postInput = document.getElementById('comment');
+      const nameInput = document.getElementById('name');
+      const postList = document.getElementById('post-list');
+
+      if (postInput.value.trim() === '' || nameInput.value.trim() === '') {
+        alert('Please enter both your name and comment');
+        return;
+      }
+
+      const postDiv = document.createElement('div');
+      postDiv.className = 'post';
+      postDiv.innerHTML = `<p><strong>${nameInput.value}:</strong> ${postInput.value}</p>
+                           <div class="reply-form">
+                               <textarea class="reply-input" placeholder="Write your reply"></textarea>
+                               <button class="reply-button" onclick="postReply(this)">Reply</button>
+                           </div>`;
+
+      postList.appendChild(postDiv);
+      postInput.value = '';
+      nameInput.value = '';
+    }
+ 
+    // Function to post a reply
+    function postReply(button) {
+      const replyInput = button.previousElementSibling;
+ 
+      if (replyInput.value.trim() === '' || nInput.value.trim() === '') {
+          alert('Please enter a reply');
+          return;
+      }
+
+      const replyDiv = document.createElement('div');
+      replyDiv.innerHTML = `<p><strong>${nInput.value}:</strong> ${replyInput.value}</p>`;
+
+      button.parentElement.parentElement.appendChild(replyDiv);
+      replyInput.value = '';
+      nInput.value = '';
+    }
+  </script>
+</body>
+</html>
+
+
+  
+

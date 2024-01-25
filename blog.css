@@ -1,0 +1,235 @@
+body{
+   background:url(https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-position: center;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    
+}
+.placement-intership_container{
+    overflow-x: hidden;
+    position: relative;
+    margin-bottom: 5rem;
+}
+.PnI{
+    padding-top:1rem ;
+}
+.avatar{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1rem;
+    border: 1rem solid pink;
+}
+
+.info{
+    text-align: center;
+}
+.body1{
+
+padding:2rem;
+margin-top: 3rem;
+position: relative;
+}
+.body1::before{
+    content: "";
+    display: block;
+   
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    left: 48%;
+    top: -1.5rem;
+    transform: rotate(45deg);
+
+}
+h1{
+    font-size:60px;
+    font-weight: 600;
+    text-align: center;
+    background: linear-gradient(red,black,white);
+    color: transparent;
+    text-shadow: 0 0 60px rgba(138, 122, 122, 0.556);
+    background-clip: text;
+    -webkit-background-clip: text;
+    
+    animation: anime 1s infinite alternate;
+}
+@keyframes anime{
+    100%{
+        text-shadow: 0 0 60px rgba(0, 47, 255, 0.556);
+    }
+}
+ .q1{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    min-height: 80vh;
+    
+    
+}
+.wrapper{
+    margin-left: 25%;
+    width: 605px;
+background: linear-gradient(rgb(79, 76, 76),white);
+border-radius: 15px;
+padding: 30px 30px 25px;
+}
+.wrapper header{
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+}
+.wrappper .content{
+    margin: 34px 0;
+}
+.content .quote-area{
+display: flex;
+justify-content: center;
+}
+.quote-area i{
+    font-size: 15px;
+}
+.quote-area .quote{
+    font-size: 18px;
+    text-align: center;
+word-break: break-all;
+}
+.quote-area i:first-child{
+    margin: 3px 10px 0 0;
+}
+.quote-area i:last-child{
+  
+    display: flex;
+ margin-top: 50%;
+    align-items: flex-end;
+}
+.content .author{
+    display: flex;
+    margin-top: 20px;
+    justify-content: flex-end;
+
+}
+.author span:first-child{
+    margin: -7px 5px 0 0;
+}
+.wrapper .buttons{
+    border-top: 1px solid green;
+}
+.buttons .features{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.features ul{
+    display: flex;
+}
+.features ul li{
+    list-style: none;
+    margin: 0 5px;
+    height: 47px;
+    width: 47px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all ease 0.3s;
+    border: 2px solid rgb(109, 106, 109);
+}
+.features ul li:hover{
+    color: white;
+    background: rgb(152, 146, 152);
+}
+.features button{
+border: none;
+outline: none;
+
+padding: 13px 22px;
+border-radius: 30px;
+color: white;
+font-style: 16px;
+cursor: pointer;
+}
+button.loading{
+    opacity: 0.7;
+    pointer-events: none;
+}
+.ques{
+    height: 100%;
+    
+   
+}
+.ques h1{
+font-size: 3rem;
+
+    
+   
+}
+.container-ques{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.que{
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    background:rgba(90, 87, 87, 0.796);
+display: flex;
+
+align-items: center;
+gap: 1.4rem;
+
+
+cursor: pointer;
+height: fit-content;
+}
+.que h4{
+    color: black;
+    font-size: 1.2rem;
+   margin-top: -3%;
+}
+.que-img{
+    margin-top: -3%;
+    align-self: flex-start;
+}
+
+.que p{
+    margin-top: 0.8rem;
+}
+.swiper {
+    width: 100%;
+    height: 80%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background:transparent;
+   width: 80%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    border-radius: 50%;
+    height: 200px;
+    margin-top: 0.2%;
+    width: 200px;
+    object-fit: cover;
+  }
+  .swiper-slide h3{
+font-weight: 500;
+font-size: 2vw;
+width: 50%;
+margin:30px;
+  }
+  .swiper-slide p{
+    margin-top: -0.5%;
+  }

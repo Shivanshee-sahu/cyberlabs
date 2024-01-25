@@ -1,0 +1,156 @@
+h1{
+    display: flex;
+    font-size: 2.5em;
+    text-align: justify;
+    color:white;
+  align-items: center;
+  align-self: center;
+    justify-content: center;
+    margin-top: -1%;
+   
+   
+}
+input,button,textarea{
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    box-sizing: border-box;
+  
+}
+/*body{
+  width: 100%;
+  height: 100%;
+  background-image: url(https://img.freepik.com/free-vector/gradient-technology-futuristic-background_23-2149122416.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}*/
+
+
+.post-section{
+    gap: 1rem;
+    flex-direction: column;
+margin-top: 10%;
+display: flex;
+justify-content: center;
+align-items: center;
+left: 50%;
+padding: 20px 20px;
+
+}
+textarea {
+    font-size: 1em;
+    border: 0;
+    color: black;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, .25);
+    resize: none;
+    height: 6em;
+}
+
+textarea::placeholder {
+    color:grey;
+    opacity: 1; 
+}
+
+textarea:-ms-input-placeholder {
+    color: grey;
+}
+.posts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+	margin-bottom: 1.8em;
+}
+.post {
+    width: 80%;
+    display: flex; 
+margin-left: 10%;
+    background-position-y: -60%;
+  backface-visibility: 10%;
+    flex-direction: column;
+    backdrop-filter: 5px;
+ background: url(https://www.shutterstock.com/shutterstock/photos/2398627177/display_1500/stock-photo-indoor-photo-of-headphones-plant-coffee-mug-stationary-and-monitor-with-a-yellow-and-blue-2398627177.jpg) ;
+ background-repeat: no-repeat;
+font-size: 1.1rem;
+    padding: 0.8em;
+    font-weight: 400;
+
+}
+
+.post .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post .header h3 {
+    font-size: 1em;
+}
+#post-btn{
+    width: 40%;
+    background: linear-gradient(90deg,#6c41d5,#b85aa6 99.48%);
+    justify-content: center;
+    display: flex;
+
+   
+}
+.post p {
+    font-size: 1em;
+    line-height: 1.3em;
+}
+.filters-and-posts-section {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+}
+.filters-section {
+    display: flex;
+    gap: 0.4em;
+   margin-bottom: 10%;
+}
+.filter-btn {
+    color: white;
+    font-size: 0.9em;
+    padding: 0.3em;
+    background-color: transparent;
+}
+.selected-filter {
+    color:white;
+    background-color: black;
+}
+.post .footer {
+    display: flex;
+    align-self:center;
+    gap: 0.4em;
+    right: -10%;
+}
+.post .footer button {
+    font-size: 0.9em;
+    width: 50%;
+    padding: 0.2em 0.8em;
+    box-shadow: 0px red 0px 0px blue;
+    position: relative;
+   
+}
+
+.post .footer button:hover {
+   background: transparent;
+   align-items: end;
+  
+}
+
+.post .footer .edit-color {
+  color: white;
+    background-color:rgb(14, 226, 219);
+}
+.post .footer .delete-color{
+    background: darkred;
+  color: white;
+
+
+}
+

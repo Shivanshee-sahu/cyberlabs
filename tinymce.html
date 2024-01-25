@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include the TinyMCE script from the Tiny Cloud -->
+  <script src="https://cdn.tiny.cloud/1/codwleldkvfa3pj4vtrijsfw7quotwiuiqzgz4yhc8lby5up/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+    
+    // Initialize TinyMCE on a textarea element
+    tinymce.init({
+      selector: '#post-content',
+      // Enable the plugins you want to use
+      plugins: 'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount',
+      // Add the toolbar buttons you want to use
+      toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+      // Set the height of the editor
+      height: 500,
+      // Set the content style for the editor
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+    // Define a function to submit the post data to the server
+    function submitPost() {
+      // Get the post title from the input element
+      var postTitle = document.getElementById("post-title").value;
+      // Get the post content from the editor
+      var postContent = tinymce.get("post-content").getContent();
+      // Check if the post title and content are not empty
+      if (postTitle && postContent) {
+        // Create a JSON object with the post data
+        var postData = {
+          title: postTitle,
+          content: postContent
+        };
+        // Convert the JSON object to a string
+        var postDataString = JSON.stringify(postData);
+        // Create a XMLHttpRequest object to send the request to the server
+        var xhr = new XMLHttpRequest();
+        // Set the request method, URL, and asynchronous flag
+        xhr.open("POST", "/create-post", true);
+        // Set the request header for the content type
+        xhr.setRequestHeader("Content-Type", "application/json");
+        // Define a callback function to handle the response
+        xhr.onload = function() {
+          // Check if the status code is 200 (OK)
+          if (xhr.status == 200) {
+            // Parse the response data as JSON
+            var responseData = JSON.parse(xhr.responseText);
+            // Check if the response has a success property
+            if (responseData.success) {
+              // Display a success message
+              alert("Post created successfully!");
+              // Clear the post title and content
+              document.getElementById("post-title").value = "";
+              tinymce.get("post-content").setContent("");
+            } else {
+              // Display an error message
+              alert("Post creation failed: " + responseData.error);
+            }
+          } else {
+            // Display an error message
+            alert("Request failed: " + xhr.statusText);
+          }
+        };
+        // Send the request with the post data
+        xhr.send(postDataString);
+      } else {
+        // Display an error message
+        alert("Please enter a post title and content.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <style>
+    body{
+    background: url(https://th.bing.com/th/id/OIP.EStRDPjT4LOrveJfYqZPUgHaFj?pid=ImgDet&w=474&h=355&rs=1);
+    color: rgb(253, 251, 252);
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+    }
+    h1{
+      align-items: center;
+      justify-content: center;
+      margin-left: 45%;
+      font-size: 2.4rem;
+    }
+    button{
+      margin-top: 60px;
+        height: 40px;
+        width: 140px;
+        outline: none;
+        margin-left: 45%;
+        background: palevioletred;
+        color: white;
+        font-weight: 800;
+    }
+ 
+  </style>
+  <h1 >Create a Post</h1>
+  <form method="post">
+    <!-- Create an input element for the post title -->
+    <label for="post-title">Post Title:</label>
+    <input type="text" id="post-title" name="post-title" placeholder="Enter a post title" required>
+    <!-- Create a textarea element for the post content -->
+    <label for="post-content">Post Content:</label>
+    <textarea id="post-content" name="post-content" placeholder="Enter a post content" required></textarea>
+    <!-- Create a button element to submit the post -->
+    <button type="button" onclick="submitPost()">Submit Post</button>
+  </form>
+</body>
+</html>
